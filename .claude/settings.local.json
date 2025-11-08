@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python -m uvicorn:*)"
+      "Bash(python -m uvicorn:*)",
+      "Bash(git add:*)",
+      "Bash(git commit --amend -m \"$(cat <<''EOF''\nFix Vercel deployment 404 errors\n\n- Updated vercel.json to use modern rewrites configuration\n- Added favicon.svg to resolve favicon 404 errors\n- Configured rewrites for static files and favicon\n- Linked favicon in index.html template\n\nThis fixes the 404 errors for /favicon.ico and /static/style.css and removes the Vercel build warning.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
