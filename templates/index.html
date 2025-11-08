@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Currículo profissional de Moises Cardoso - Desenvolvedor .NET Sênior">
+    <meta name="keywords" content=".NET, C#, Microserviços, Kafka, AWS, Azure, FastAPI">
+    <meta name="author" content="Moises Cardoso">
+    <title>{{ profile.name }} - Currículo</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="profile-header">
+                    <h1 class="name">{{ profile.name }}</h1>
+                    <h2 class="title">{{ profile.title }}</h2>
+                    <p class="location">{{ profile.location }}</p>
+                </div>
+
+                <div class="header-actions">
+                    <a href="/cv/download" class="btn btn-primary" download>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download CV (PDF)
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Contato -->
+                <section class="card">
+                    <h3 class="section-title">Contato</h3>
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            <a href="tel:{{ profile.contact.phone }}">{{ profile.contact.phone }}</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            <a href="mailto:{{ profile.contact.email }}">{{ profile.contact.email }}</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                            <a href="https://{{ profile.contact.linkedin }}" target="_blank">LinkedIn</a>
+                        </div>
+                        <div class="contact-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                            <a href="https://{{ profile.contact.portfolio }}" target="_blank">Portfolio</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Skills -->
+                <section class="card">
+                    <h3 class="section-title">Principais Competências</h3>
+                    <div class="skills-list">
+                        {% for skill in profile.skills[:12] %}
+                        <span class="skill-badge">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- Certificações -->
+                {% if profile.certifications %}
+                <section class="card">
+                    <h3 class="section-title">Certificações</h3>
+                    <ul class="certifications-list">
+                        {% for cert in profile.certifications %}
+                        <li>{{ cert }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                {% endif %}
+            </aside>
+
+            <!-- Main -->
+            <main class="main">
+                <!-- Resumo -->
+                <section class="card">
+                    <h3 class="section-title">Resumo</h3>
+                    <div class="summary">
+                        {{ profile.summary | replace('\n\n', '</p><p>') | safe }}
+                    </div>
+                </section>
+
+                <!-- Experiência -->
+                <section class="card">
+                    <h3 class="section-title">Experiência Profissional</h3>
+                    <div class="experience-list">
+                        {% for exp in profile.experience %}
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div>
+                                    <h4 class="company-name">{{ exp.company }}</h4>
+                                    <p class="position">{{ exp.position }}</p>
+                                    <p class="period">{{ exp.period }}</p>
+                                    <p class="exp-location">{{ exp.location }}</p>
+                                </div>
+                            </div>
+                            <div class="experience-content">
+                                <p class="description">{{ exp.description | replace('\n\n', '</p><p>') | safe }}</p>
+
+                                {% if exp.achievements %}
+                                <div class="achievements">
+                                    <strong>Principais entregas e tecnologias:</strong>
+                                    <ul>
+                                        {% for achievement in exp.achievements %}
+                                        <li>{{ achievement }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                {% endif %}
+
+                                {% if exp.results %}
+                                <div class="results">
+                                    <strong>Resultados:</strong> {{ exp.results }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- Formação -->
+                <section class="card">
+                    <h3 class="section-title">Formação Acadêmica</h3>
+                    <div class="education-list">
+                        {% for edu in profile.education %}
+                        <div class="education-item">
+                            <h4 class="institution">{{ edu.institution }}</h4>
+                            <p class="degree">{{ edu.degree }}</p>
+                            <p class="period">{{ edu.period }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- API Info -->
+                <section class="card api-info">
+                    <h3 class="section-title">API Endpoints</h3>
+                    <p>Esta página é servida por uma API FastAPI. Você pode acessar os dados em formato JSON:</p>
+                    <ul class="api-endpoints">
+                        <li><code>GET /api/profile</code> - Dados completos do perfil</li>
+                        <li><code>GET /api/experience</code> - Experiências profissionais</li>
+                        <li><code>GET /api/skills</code> - Competências técnicas</li>
+                        <li><code>GET /api/contact</code> - Informações de contato</li>
+                        <li><code>GET /cv/download</code> - Download do CV em PDF</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 {{ profile.name }}. Desenvolvido com FastAPI.</p>
+        </footer>
+    </div>
+</body>
+</html>
